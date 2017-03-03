@@ -1,23 +1,15 @@
 #!groovy
 
-pipeline {
-    agent any
+node {
+    stage "Prepare environment"
+        checkout scm
+        def environment  = docker.build 'golang-node'
 
-    stages {
-        stage('Build') {
-            steps {
-                echo 'Building..'
-            }
+        environment.inside {
+            stage "Configure and run tests"
+                sh "go get -d -v -t && go test --cover -v ./... && go build -v -o go-test"
         }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
-    }
+
+    stage "Cleanup"
+        deleteDir()
 }
