@@ -7,7 +7,7 @@ node {
 
         environment.inside {
             stage "Configure and run tests"
-              sh "go get -d -v -t && go test --cover -v ./...
+              sh "go get -d -v -t && go test --cover -v ./..."
 
             stage "Build Executable"
               sh "go build -v -o go-test"
