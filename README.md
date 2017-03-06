@@ -1,5 +1,12 @@
 # Golang web service testing
 
+This is a basic repository with a vanilla Golang web server, the goal is to have an example application that I can use as a test case in Jenkins. The goal is to set up a Jenkins pipeline that checks out the code, builds the web application, runs appropriate tests and reports on success/failure.
+
+I am usign the following components:
+
+* Docker container based on the official golang image to build and run the golang app and tests
+* Jenkinsfile to describe the jenkins test pipeline to be run
+
 ## Using Docker
 
     # Build the docker image
@@ -8,7 +15,7 @@
 
     # Access the app on localhost:8000
 
-    # Shut down the app
+    # When finished, shut down the app
     > docker stop go-test
 
 ## Testing using docker-compose
@@ -17,7 +24,7 @@ Docker compose is used to define the base Golang images, load any required packa
 
     # Run the tests and build go-test
     > docker-compose -f docker-compose-test-local.yml run --rm unit
-    dc -f docker-compose-test-local.yml run --rm unit
+
     === RUN   TestYourHandler
     --- PASS: TestYourHandler (0.00s)
     PASS
